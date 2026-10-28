@@ -10,7 +10,7 @@ test('user can sign in', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'automation' })).toBeVisible();
 });
 
-test.only('user cannot sign in with invalid credentials', async ({ page }) => {
+test('user cannot sign in with invalid credentials', async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.goto();

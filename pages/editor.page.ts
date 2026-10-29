@@ -27,4 +27,10 @@ export class EditorPage {
             await this.enterTagsInput.press('Enter');
         }
     }
+
+    async publishArticle(title: string, about: string, content: string, tags: string[]) {
+        await this.goto();
+        await this.fillArticleFields(title, about, content, tags);
+        await this.page.getByRole('button', { name: 'Publish Article' }).click();
+    }
 }

@@ -1,5 +1,13 @@
 import { Locator, Page } from '@playwright/test';
 
+
+export type Article = {
+    title: string;
+    about: string;
+    content: string;
+    tags: string[];
+};
+
 export class EditorPage {
     readonly editorInput: Locator;
     readonly articleAboutInput: Locator;
@@ -17,7 +25,7 @@ export class EditorPage {
         await this.page.goto('/editor');
     }
 
-    async fillArticleFields(title: string, about: string, content: string, tags: string[]) {
+    async fillArticleFields({title, about, content, tags}: Article) {
         await this.editorInput.fill(title);
         await this.articleAboutInput.fill(about);
         await this.articleContentInput.fill(content);
@@ -28,9 +36,9 @@ export class EditorPage {
         }
     }
 
-    async publishArticle(title: string, about: string, content: string, tags: string[]) {
+    async publishArticle({title, about, content, tags}: Article) {
         await this.goto();
-        await this.fillArticleFields(title, about, content, tags);
+        await this.fillArticleFields({title, about, content, tags});
         await this.page.getByRole('button', { name: 'Publish Article' }).click();
     }
 }

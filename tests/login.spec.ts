@@ -6,8 +6,7 @@ test('user can sign in', async ({ page }) => {
 
   await loginPage.goto();
   await loginPage.login('automation@test.com', 'Autoproject12@');
-
-  await expect(page.getByRole('link', { name: 'automation' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'New Article' })).toBeVisible();
 });
 
 test('user cannot sign in with invalid credentials', async ({ page }) => {

@@ -6,7 +6,7 @@ test.describe("Login Page", () => {
     const loginPage = new LoginPage(page);
 
     await loginPage.goto();
-    await loginPage.login("automation@test.com", "Autoproject12@");
+    await loginPage.login("automation4@test.com", "Autoproject14@");
     await expect(page.getByRole("link", { name: "New Article" })).toBeVisible();
   });
 

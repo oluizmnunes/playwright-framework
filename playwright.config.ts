@@ -45,6 +45,7 @@ export default defineConfig({
         ...devices["Desktop Chrome"],
         storageState: "./playwright/.auth/user.json",
       },
+      testIgnore: /login\.spec\.ts/,
       dependencies: ["setup"], // run "setup" project before this one
     },
     
@@ -58,12 +59,38 @@ export default defineConfig({
 
     {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "./playwright/.auth/user.json",
+      },
+      testIgnore: /login\.spec\.ts/,
+      dependencies: ["setup"],
+    },
+
+    {
+      name: "firefox-guest",
+      use: { 
+        ...devices["Desktop Chrome"] 
+      },
+      testMatch: /login\.spec\.ts/,
     },
 
     {
       name: "webkit",
-      use: { ...devices["Desktop Safari"] },
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "./playwright/.auth/user.json",
+      },
+      testIgnore: /login\.spec\.ts/,
+      dependencies: ["setup"], // run "setup" project before this one
+    },
+
+    {
+      name: "webkit-guest",
+      use: { 
+        ...devices["Desktop Chrome"] 
+      },
+      testMatch: /login\.spec\.ts/,
     },
 
     /* Test against mobile viewports. */

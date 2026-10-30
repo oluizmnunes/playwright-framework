@@ -4,7 +4,7 @@ import { LoginPage } from "../pages/login.page";
 
 const authFile = path.join(__dirname, "../playwright/.auth/user.json");
 
-setup("sign in to the app", async ({ page }) => {
+setup("authenticate user", async ({ page }) => {
   const loginPage = new LoginPage(page);
 
   await loginPage.goto();

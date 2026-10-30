@@ -47,6 +47,14 @@ export default defineConfig({
       },
       dependencies: ["setup"], // run "setup" project before this one
     },
+    
+    {
+      name: "chromium-guest",
+      use: { 
+        ...devices["Desktop Chrome"] 
+      },
+      testMatch: /login\.spec\.ts/,
+    },
 
     {
       name: "firefox",

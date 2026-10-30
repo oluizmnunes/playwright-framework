@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/login.page';
 import { EditorPage } from '../pages/editor.page';
 import { faker } from '@faker-js/faker';
 
@@ -14,7 +13,7 @@ test.describe('Editor Page', () => {
       content: 'Playwright performs a range of actionability checks...',
       tags: ['Visible', 'Stable', 'Receives Events', 'Enable', 'Editable'],
     };
-    
+
     await page.goto('/');
     await page.getByRole('link', { name: 'New Article' }).click();
     await editorPage.fillArticleFields(article);

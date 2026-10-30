@@ -11,6 +11,6 @@ setup("authenticate user", async ({ page }) => {
   await loginPage.login("automation@test.com", "Autoproject12@");
   await expect(page.getByRole("link", { name: "New Article" })).toBeVisible();
 
-  // Save the authentication state to a file
+  // save the authentication state to the user.json file
   await page.context().storageState({ path: authFile });
 });

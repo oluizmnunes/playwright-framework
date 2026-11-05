@@ -1,13 +1,32 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/login.page";
+import { ensureUser, loginUser } from "../helpers/ensure-user";
 
 test.describe("Login Page", () => {
-  test("user can sign in", async ({ page }) => {
-    const loginPage = new LoginPage(page);
+  test.describe("valid account", () => {
+    test.beforeEach(async ({ request }) => {
+      await ensureUser(request, loginUser);
+    });
 
-    await loginPage.goto();
-    await loginPage.login("automation4@test.com", "Autoproject14@");
-    await expect(page.getByRole("link", { name: "New Article" })).toBeVisible();
+    test("user can sign in", async ({ page }) => {
+      const loginPage = new LoginPage(page);
+
+      await loginPage.goto();
+      await loginPage.login(loginUser.email, loginUser.password);
+      await expect(page.getByRole("link", { name: "New Article" })).toBeVisible();
+    });
+
+    test("user can sign out", async ({ page }) => {
+      const loginPage = new LoginPage(page);
+
+      await loginPage.goto();
+      await loginPage.login(loginUser.email, loginUser.password);
+      await expect(page.getByRole("link", { name: "New Article" })).toBeVisible();
+
+      await page.getByRole("link", { name: "Settings" }).click();
+      await page.getByRole("button", { name: "Or click here to logout." }).click();
+      await expect(page.getByRole("link", { name: "Sign in" })).toBeVisible();
+    });
   });
 
   test("user cannot sign in with invalid credentials", async ({ page }) => {
